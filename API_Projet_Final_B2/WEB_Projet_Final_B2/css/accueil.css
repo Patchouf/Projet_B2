@@ -1,0 +1,103 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+    margin: 0;
+    padding: 0;
+}
+
+.divBouton {
+    width: 100%;
+    height: 150px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.selectBouton {
+    border-style: none;
+    border-radius: 10%;
+    color: #333;
+    font-size: 1.2em;
+    background-color: #f8f8f8;
+    text-decoration: underline;
+    padding: 20px;
+    margin: 10px;
+}
+
+.selectBouton:hover{
+    transform: scale(110%);
+    cursor: pointer;
+}
+
+.notSelectBouton {
+    border-style: none;
+    border-radius: 10%;
+    color: #333;
+    font-size: 1.2em;
+    background-color: #f8f8f8;
+    padding: 20px;
+    margin: 10px;
+    
+}
+
+.notSelectBouton:hover{
+    transform: scale(110%);
+    cursor: pointer;
+}
+
+.divResultats {
+    width: 100%;
+    align-self: center;
+    display: flex;
+    justify-content: center;
+}
+
+.selectDiv {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    width: 85%;
+    gap: 10px; 
+}
+
+.notSelectDiv {
+    display: none;
+}
+
+.buResultatLivre {
+    background-color: #ebebeb;
+    height: 100%;
+    width: 100%;
+    border-style: none;
+}
+
+.buResultatPersonne {
+    background-color: #ebebeb;
+    height: 100%;
+    width: 100%;
+    border-style: none;
+}
+
+.buResultat:hover {
+    transform: scale(105%);
+    cursor: pointer;
+}
+
+.photoLivre {
+    margin-top: 5%;
+    width: 90%;
+}
+
+.photoPerson {
+    margin-top: 5%;
+    width: 90%;
+    border-radius: 50%;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 20px;
+}

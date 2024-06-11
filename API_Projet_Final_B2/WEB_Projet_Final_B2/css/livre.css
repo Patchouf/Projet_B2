@@ -1,0 +1,187 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    z-index: 2;
+}
+
+.displayNone {
+    display: none;
+}
+
+.background-flou {
+    position:fixed; 
+    z-index: 100; 
+    background-color: rgba(255, 255, 255, 0.5); 
+    width: 100%; 
+    height: 100%;
+}
+
+.collection {
+    position:fixed;
+    width: 50%; 
+    height: 45%;
+    z-index: 110; 
+    top: 25%; 
+    left: 25%; 
+    background-color: #f8f8f8;
+}
+
+.top-list-collection {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.vos-collections {
+    margin: 30px;
+}
+
+.bouton-croix {
+    border-style: none;
+    background-color: #f8f8f8;
+}
+
+.croix {
+    width: 30px;
+    height: 30px;
+    margin: 30px;
+}
+
+.croix:hover {
+    transform: scale(110%);
+    cursor: pointer;
+    background-color: rgb(255, 162, 162);
+}
+
+.list-collection {
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    height: 70%;
+}
+
+.item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 10px;
+    border-radius: 15px;
+    margin: 10px;
+    background-color: #e1e1e1;
+}
+
+.buAjouterCollection {
+    border-style: none;
+    background-color: #e1e1e1;
+    height: 100%;
+}
+
+.buAjouterCollection:hover {
+    transform: scale(110%);
+    cursor: pointer;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    margin-top: 5%;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.book-details {
+    display: flex;
+    gap: 20px;
+}
+
+.book-details img {
+    max-width: 300px;
+    height: auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.book-info {
+    flex: 1;
+}
+
+.book-info h1 {
+    margin: 0 0 10px;
+}
+
+.book-info p {
+    margin: 5px 0;
+    color: #555;
+}
+
+.book-info .price {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #000;
+}
+
+.book-info .buttons {
+    margin-top: 20px;
+}
+
+.book-info button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.book-info button:hover {
+    background-color: #45a049;
+}
+
+.comments-section {
+    margin-top: 40px;
+}
+
+.comments-section h2 {
+    margin-bottom: 20px;
+}
+
+.comment {
+    display: flex;
+    align-items: center;
+    background-color: #f0f0f0;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.comment p {
+    margin: 0;
+}
+
+.profil_pic_comment {
+    width: 5%;
+    border-radius: 50%;
+    margin-left: 10px;
+    margin-right: 50px;
+}
+
+.input-text {
+    width: 50%;
+    height: 20px;
+}
+
+.boutonAjouter {
+    width: 20%;
+    height: 25px;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 20px;
+}

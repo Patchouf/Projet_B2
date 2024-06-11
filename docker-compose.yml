@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  web:
+    build: ./API_Projet_Final_B2
+    image: api
+    container_name: nginx
+    ports:
+      - "8080:80"
+    networks:
+      my_network:
+        ipv4_address: 172.16.23.11
+
+  db:
+    build: ./BDD/BDD_Projet_Final_B2
+    image: db
+    container_name: db
+    ports:
+      - "3306:3306"
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: db-projet-final
+    networks:
+      my_network:
+        ipv4_address: 172.16.23.10
+
+networks:
+  my_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.16.23.0/24

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Librairie en Ligne - Détails du Livre</title>
+    <link rel="stylesheet" href="../css/livre.css">
+    <link rel="stylesheet" href="../css/header.css">
+</head>
+
+<body>
+    <div id="header"></div>
+
+    <div class="background-flou" id="collection">
+        <div class="collection">
+            <div class="top-list-collection">
+                <h3 class="vos-collections">Vos collections</h3>
+                <button class="bouton-croix" id="bouton-croix">
+                    <img src="../img/croix.png" alt="croix" class="croix">
+                </button>
+            </div>
+            <div class="list-collection">
+                <div class="item">
+                    <div class="collection-name">Truc</div>
+                    <input type="checkbox" class="checkbox">
+                </div>
+                <div class="item">
+                    <div class="collection-name">Bidule</div>
+                    <input type="checkbox" class="checkbox">
+                </div>
+                <div class="item">
+                    <button class="buAjouterCollection" id="buAjouterCollection">
+                        Ajouter
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <div class="container">
+        <div class="book-details">
+            <img src="../img/livre.png" alt="Couverture du Livre">
+            <div class="book-info">
+                <h1>Titre du Livre</h1>
+                <p><strong>Auteur:</strong> Auteur 1</p>
+                <p><strong>Genre:</strong> Fiction</p>
+                <p class="price">€20.00</p>
+                <p><strong>Description:</strong> Ce livre raconte l'histoire fascinante de personnages captivants dans
+                    un monde imaginaire. Plongez dans une aventure pleine de rebondissements et de mystères.</p>
+                <div class="buttons">
+                    <button id="Add-Livre">Ajouter à une collection</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="comments-section">
+            <div class="comment">
+                <img src="../img/profile-picture.png" alt="profil pic" class="profil_pic_comment">
+                <p>Un excellent livre, captivant du début à la fin !</p>
+            </div>
+            <div class="comment">
+                <img src="../img/profile-picture.png" alt="profil pic" class="profil_pic_comment">
+                <p>J'ai trouvé l'intrigue un peu prévisible.</p>
+            </div>
+            <!-- Ajouter plus de commentaires ici -->
+            <div>
+                <input type="text" placeholder="Ajouter un commentaire" class="input-text" id="input-text">
+                <button class="boutonAjouter" id="boutonAjouter">Ajouter</button>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; Biblio. Tous droits réservés.</p>
+    </footer>
+
+    <script src="../js/livre.js"></script>
+    <script src="../js/header.js"></script>
+</body>
+
+</html>
