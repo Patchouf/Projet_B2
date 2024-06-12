@@ -26,16 +26,17 @@ Pour lancer l'API en local, éxecutez la commande
 ```bash
 dotnet run 
 ```
-## Lancer Biblio avec Docker
+### Lancer Biblio avec Docker
 
 Pour lancer l'application avec Docker, nous allons utiliser une commande Docker compose :
 
 ```bash
 docker-compose up --build
 ```
-Pour arrêter votre application :
 
+Pour arrêter votre application :
 ```bash
 docker-compose down 
 ```
+
 ## Yann Fournier et Patchouf
