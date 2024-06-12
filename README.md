@@ -17,9 +17,9 @@ Clonez le repository dans votre éditeur de code :
 git clone https://github.com/Patchouf/Projet_B2.git 
 ```
 
-## Lancer Biblio en local
+##  Comment lancer Biblio ?
 
-### Lnacer l'API en local
+### Lancer l'API en local
 
 Pour lancer l'API en local, éxecutez la commande 
 
