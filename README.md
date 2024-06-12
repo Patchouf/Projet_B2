@@ -6,8 +6,8 @@ Biblio est une application web qui permet de créer des collections de livre.
 
 ## Prérequis
 
--Docker
--Docker Compose
+- Docker
+- Docker Compose
 
 ## Installation
 
