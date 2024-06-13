@@ -1,5 +1,5 @@
 // URL API
-var baseURL = "http://localhost:8080";
+var baseURL = "http://localhost:8080/api/Auteurs";
 
 // Récupération de l'Id dans l'url
 var parametres = new URLSearchParams(window.location.search);

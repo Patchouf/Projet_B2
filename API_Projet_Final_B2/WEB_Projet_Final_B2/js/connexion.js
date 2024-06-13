@@ -1,5 +1,5 @@
 // URL API
-var baseURL = "http://localhost:8080";
+var baseURL = "http://localhost:8080/api/Connexion";
 
 // Input et warning
 var email = document.getElementById('email');
