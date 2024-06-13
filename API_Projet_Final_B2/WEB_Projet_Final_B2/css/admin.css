@@ -1,0 +1,72 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+    margin: 0;
+    padding: 0;
+}
+
+.divPricipale {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    width: 90%;
+    margin-left: 5%;
+}
+
+h1 {
+    margin-left: 5%;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.divRequetes {
+    border-bottom: solid 1px rgba(0, 0, 0, 0.3);
+}
+
+.divInput {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 5px;
+    margin-bottom: 20px;
+}
+
+input {
+    margin: 5px;
+    height: 30px;
+    width: 90%;
+    padding-left: 20px;
+    border-radius: 10px;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.buValidation {
+    height: 32px;
+    width: 100%;
+    border-radius: 10px;
+    border-style: solid;
+    border-width: 1px;
+    margin-left: 5px;
+    margin-top: 5px;
+}
+
+.colorBuValidationGreen {
+    background-color: rgb(224, 255, 226);
+}
+
+.colorBuValidationRed {
+    background-color: rgb(255, 224, 224);
+}
+
+.buValidation:hover {
+    transform: scale(105%);
+    cursor: pointer;
+}
+
+.displayNone {
+    display: none;
+}
+
+.warning {
+    color: red;
+}

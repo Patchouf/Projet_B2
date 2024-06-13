@@ -57,9 +57,12 @@ body {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     width: 85%;
-    gap: 10px; 
+    gap: 10px;
 }
 
+.selectDivRecherche {
+    width: 85%;
+}
 .notSelectDiv {
     display: none;
 }
@@ -68,17 +71,22 @@ body {
     background-color: #ebebeb;
     height: 100%;
     width: 100%;
-    border-style: none;
+    border-width: 1px;
 }
 
 .buResultatPersonne {
     background-color: #ebebeb;
     height: 100%;
     width: 100%;
-    border-style: none;
+    border-width: 1px;
 }
 
-.buResultat:hover {
+.buResultatLivre:hover {
+    transform: scale(105%);
+    cursor: pointer;
+}
+
+.buResultatPersonne:hover {
     transform: scale(105%);
     cursor: pointer;
 }
@@ -100,4 +108,45 @@ footer {
     text-align: center;
     padding: 10px 0;
     margin-top: 20px;
+}
+
+.searchDiv {
+    display: flex;
+    flex-direction: row;
+   justify-content: center;
+   /* align-items: center; */
+   height: 40px;
+}
+
+.searchText {
+    margin: 0px;
+    height: 80%;
+    width: 70%;
+    border-radius: 20px;
+    padding-left: 20px;
+    border-width: 1px;
+}
+
+.searchText::placeholder {
+    margin-left: 50px;
+}
+
+.searchButton {
+    height: 100%;
+    width: 40px;
+    padding: 0px;
+    margin: 0px;
+    border-style: none;
+    background-color: #f8f8f8;
+}
+
+.searchButtonImg {
+    height: inherit;
+    width: inherit;
+    margin: 0px;
+}
+
+.searchButtonImg:hover {
+    transform: scale(110%);
+    cursor: pointer;
 }

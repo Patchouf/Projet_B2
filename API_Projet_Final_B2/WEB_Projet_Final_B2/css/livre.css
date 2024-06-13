@@ -12,20 +12,20 @@ body {
 }
 
 .background-flou {
-    position:fixed; 
-    z-index: 100; 
-    background-color: rgba(255, 255, 255, 0.5); 
-    width: 100%; 
+    position: fixed;
+    z-index: 100;
+    background-color: rgba(255, 255, 255, 0.5);
+    width: 100%;
     height: 100%;
 }
 
 .collection {
-    position:fixed;
-    width: 50%; 
+    position: fixed;
+    width: 50%;
     height: 45%;
-    z-index: 110; 
-    top: 25%; 
-    left: 25%; 
+    z-index: 110;
+    top: 25%;
+    left: 25%;
     background-color: #f8f8f8;
 }
 
@@ -84,6 +84,24 @@ body {
     cursor: pointer;
 }
 
+.livre-pic {
+    max-width: 250px;
+    max-height: 400px;
+}
+
+.boutonAuteur {
+    border-style: none;
+    background-color: #fff;
+    color: #000;
+    font-size: 17px;
+    margin-left: 10px;
+}
+
+.boutonAuteur:hover {
+    transform: scale(110%);
+    cursor: pointer;
+}
+
 .container {
     width: 80%;
     margin: auto;
@@ -123,11 +141,8 @@ body {
     color: #000;
 }
 
-.book-info .buttons {
-    margin-top: 20px;
-}
 
-.book-info button {
+.add-Livre {
     background-color: #4CAF50;
     color: white;
     border: none;
@@ -136,8 +151,10 @@ body {
     cursor: pointer;
 }
 
-.book-info button:hover {
+.add_Livre:hover {
     background-color: #45a049;
+    transform: scale(110%);
+    cursor: pointer;
 }
 
 .comments-section {
@@ -161,21 +178,35 @@ body {
     margin: 0;
 }
 
-.profil_pic_comment {
+.boutonProfilCom {
     width: 5%;
-    border-radius: 50%;
+    height: 100%;
+    min-height: 70px;
+    min-width: 70px;
     margin-left: 10px;
     margin-right: 50px;
+    border-style: none;
+}
+
+.boutonProfilCom:hover {
+    transform: scale(110%);
+    cursor: pointer;
+}
+
+.profil_pic_comment {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
 }
 
 .input-text {
     width: 50%;
-    height: 20px;
+    height: 50px;
 }
 
 .boutonAjouter {
     width: 20%;
-    height: 25px;
+    height: 55px;
 }
 
 footer {

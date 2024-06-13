@@ -16,6 +16,14 @@ var header = {
 //         divTest.innerHTML = json[0].Email;
 //     });
 
+// const response = await fetch(url, {
+//     method: 'POST',
+//     headers: {
+//         'Content-Type': 'application/json'
+//     },
+//     body: JSON.stringify(data)
+// });
+
 // Page d'origine
 var bouton = document.getElementById("truc");
 

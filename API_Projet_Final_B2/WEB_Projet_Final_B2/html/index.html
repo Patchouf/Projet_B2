@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Biblio</title>
-    <link rel="stylesheet" href="../css/accueil.css">
+    <link rel="stylesheet" href="../css/index.css">
     <link rel="stylesheet" href="../css/header.css">
 </head>
 
@@ -16,110 +16,32 @@
         <button id="boutonLivres" class="selectBouton">Livres</button>
         <button id="boutonAuteurs" class="notSelectBouton">Auteurs</button>
         <button id="boutonUtilisateurs" class="notSelectBouton">Utilisateurs</button>
+        <button id="boutonRecherches" class="notSelectBouton">Recherches</button>
     </div>
 
     <div class="divResultats">
-        <div id="resultatsLivres" class="selectDiv">
-            <button class="buResultatLivre" value="4">
-                <img src="../img/livre.png" alt="livre" class="photoLivre">
-                <p>Titre du livre</p>
-            </button>
-            <button class="buResultatLivre" value="4">
-                <img src="../img/livre.png" alt="livre" class="photoLivre">
-                <p>Titre du livre</p>
-            </button>
-            <button class="buResultatLivre" value="4">
-                <img src="../img/livre.png" alt="livre" class="photoLivre">
-                <p>Titre du livre</p>
-            </button>
-            <button class="buResultatLivre" value="4">
-                <img src="../img/livre.png" alt="livre" class="photoLivre">
-                <p>Titre du livre</p>
-            </button>
-            <button class="buResultatLivre" value="4">
-                <img src="../img/livre.png" alt="livre" class="photoLivre">
-                <p>Titre du livre</p>
-            </button>
-            <button class="buResultatLivre" value="4">
-                <img src="../img/livre.png" alt="livre" class="photoLivre">
-                <p>Titre du livre</p>
-            </button>
-            <button class="buResultatLivre" value="4">
-                <img src="../img/livre.png" alt="livre" class="photoLivre">
-                <p>Titre du livre</p>
-            </button>
-            <button class="buResultatLivre" value="4">
-                <img src="../img/livre.png" alt="livre" class="photoLivre">
-                <p>Titre du livre</p>
-            </button>
-            <button class="buResultatLivre" value="4">
-                <img src="../img/livre.png" alt="livre" class="photoLivre">
-                <p>Titre du livre</p>
-            </button>
-            <button class="buResultatLivre" value="4">
-                <img src="../img/livre.png" alt="livre" class="photoLivre">
-                <p>Titre du livre</p>
-            </button>
-        </div>
-        <div id="resultatsAuteurs" class="notSelectDiv">
-            <button class="buResultatAuteur" value="4">
-                <img src="../img/profile-picture.png" alt="livre" class="photoPerson">
-                <p>Non de la personne</p>
-            </button>
-            <button class="buResultatAuteur" value="4">
-                <img src="../img/profile-picture.png" alt="livre" class="photoPerson">
-                <p>Non de la personne</p>
-            </button>
-            <button class="buResultatAuteur" value="4">
-                <img src="../img/profile-picture.png" alt="livre" class="photoPerson">
-                <p>Non de la personne</p>
-            </button>
-            <button class="buResultatAuteur" value="4">
-                <img src="../img/profile-picture.png" alt="livre" class="photoPerson">
-                <p>Non de la personne</p>
-            </button>
-            <button class="buResultatAuteur" value="4">
-                <img src="../img/profile-picture.png" alt="livre" class="photoPerson">
-                <p>Non de la personne</p>
-            </button>
-            <button class="buResultatAuteur" value="4">
-                <img src="../img/profile-picture.png" alt="livre" class="photoPerson">
-                <p>Non de la personne</p>
-            </button>
-        </div>
-        <div id="resultatsUtilisateurs" class="notSelectDiv">
-            <button class="buResultatProfil" value="4">
-                <img src="../img/profile-picture.png" alt="livre" class="photoPerson">
-                <p>Non de la personne</p>
-            </button>
-            <button class="buResultatProfil" value="4">
-                <img src="../img/profile-picture.png" alt="livre" class="photoPerson">
-                <p>Non de la personne</p>
-            </button>
-            <button class="buResultatProfil" value="4">
-                <img src="../img/profile-picture.png" alt="livre" class="photoPerson">
-                <p>Non de la personne</p>
-            </button>
-            <button class="buResultatProfil" value="4">
-                <img src="../img/profile-picture.png" alt="livre" class="photoPerson">
-                <p>Non de la personne</p>
-            </button>
-            <button class="buResultatProfil" value="4">
-                <img src="../img/profile-picture.png" alt="livre" class="photoPerson">
-                <p>Non de la personne</p>
-            </button>
-            <button class="buResultatProfil" value="4">
-                <img src="../img/profile-picture.png" alt="livre" class="photoPerson">
-                <p>Non de la personne</p>
-            </button>
-            <button class="buResultatProfil" value="4">
-                <img src="../img/profile-picture.png" alt="livre" class="photoPerson">
-                <p>Non de la personne</p>
-            </button>
-            <button class="buResultatProfil" value="4">
-                <img src="../img/profile-picture.png" alt="livre" class="photoPerson">
-                <p>Non de la personne</p>
-            </button>
+        <div id="resultatsLivres" class="selectDiv"></div>
+        <div id="resultatsAuteurs" class="notSelectDiv"></div>
+        <div id="resultatsUtilisateurs" class="notSelectDiv"></div>
+        <div id="resultatsRecherches" class="notSelectDiv">
+            <div class="searchDiv">
+                <input type="text" name="Recherche" id="search-bar" placeholder="Recherche ..." class="searchText">
+                <div class="tkt">
+                    <button id="search-bouton" class="searchButton">
+                        <img src="../img/recherche.png" alt="rechercheBoutonImg" class="searchButtonImg">
+                    </button>
+                </div>
+            </div>
+            <div class="divBouton">
+                <button id="boutonLivres2" class="selectBouton">Livres</button>
+                <button id="boutonAuteurs2" class="notSelectBouton">Auteurs</button>
+                <button id="boutonUtilisateurs2" class="notSelectBouton">Utilisateurs</button>
+            </div>
+            <div class="divResultats">
+                <div id="resultatsLivres2" class="selectDiv">Aucun resultat</div>
+                <div id="resultatsAuteurs2" class="notSelectDiv">Aucun resultat</div>
+                <div id="resultatsUtilisateurs2" class="notSelectDiv">Aucun resultat</div>
+            </div>
         </div>
     </div>
     
@@ -127,8 +49,9 @@
         <p>&copy; 2024 Biblio. Tous droits réservés.</p>
     </footer>
 
-    <script src="../js/accueil.js"></script>
     <script src="../js/header.js"></script>
+    <script src="../js/index.js"></script>
+     
 </body>
 
 </html>

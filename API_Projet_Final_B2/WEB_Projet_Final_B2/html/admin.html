@@ -12,6 +12,139 @@
 <body>
     <div id="header"></div>
     
-    <script src="../js/admin.js"></script>
+    <div class="divPricipale" id="divPricipale">
+        <h1>Dashboard</h1>
+        <div class="divRequetes" style="border-top: solid 1px rgba(0, 0, 0, 0.3);">
+            <h2>Ajout de livre :</h2>
+            <div class="divInput" id="divInput">
+                <div style="width: 100%;">
+                    <input type="text" id="inputNomLivre" placeholder="Nom (str)">
+                    <p id="warningNomLivre" class="displayNone">Ce champs doit être rempli &#8657;</p>
+                </div>
+                <div style="width: 100%;">
+                    <input type="text" id="inputDescriptionLivre" placeholder="Description (str)">
+                    <p id="warningDescriptionLivre" class="displayNone">Ce champs doit être rempli &#8657;</p>
+                </div>
+                <div style="width: 100%;">
+                    <input type="text" id="inputPhotoLivre" placeholder="Photo (str)">
+                    <p id="warningPhotoLivre" class="displayNone">Ce champs doit être rempli &#8657;</p>
+                </div>
+                <div style="width: 100%;">
+                    <input type="text" id="inputIsbnLivre" placeholder="ISBN (str)">
+                    <p id="warningIsbnLivre" class="displayNone">Ce champs doit être rempli &#8657;</p>
+                </div>
+                <div style="width: 100%;">
+                    <input type="text" id="inputEditeurLivre" placeholder="Editeur (str)">
+                    <p id="warningEditeurLivre" class="displayNone">Ce champs doit être rempli &#8657;</p>
+                </div>
+                <div style="width: 100%;">
+                    <input type="text" id="inputPrixLivre" placeholder="Prix (float)">
+                    <p id="warningPrixLivre" class="displayNone">Ce champs doit être rempli &#8657;</p>
+                </div>
+                <div style="width: 100%;">
+                    <input type="text" id="inputAuteurIdLivre" placeholder="Identifiant de l'auteur (int)">
+                    <p id="warningAuteurIdLivre" class="displayNone">Ce champs doit être rempli &#8657;</p>
+                </div>
+                <div style="width: 100%;">
+                    <input type="text" id="inputCategorieIdLivre" placeholder="Identifiant de la categorie (int)">
+                    <p id="warningCategorieIdLivre" class="displayNone">Ce champs doit être rempli &#8657;</p>
+                </div>
+                <button class="buValidation colorBuValidationGreen" id="buAjouterLivre">Ajouter le livre</button>
+                <p id="warningTypeLivre" class="displayNone" style="margin-left: 10px;">L'un des champs n'a pas le bon type</p>
+            </div>
+        </div>
+        <div class="divRequetes">
+            <h2>Changer les informations d'un livre :</h2>
+            <div class="divInput" id="divInput">
+                <div style="width: 100%;">
+                    <input type="text" id="inputIdLivreModif" placeholder="Id du livre à modifier (int)">
+                    <p id="warningIdLivre" class="displayNone">Ce champs doit être rempli &#8657;</p>
+                </div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div style="width: 100%;">
+                    <input type="text" id="inputNomLivreModif" placeholder="Nom (str)">
+                </div>
+                <div style="width: 100%;">
+                    <input type="text" id="inputDescriptionLivreModif" placeholder="Description (str)">
+                </div>
+                <div style="width: 100%;">
+                    <input type="text" id="inputPhotoLivreModif" placeholder="Photo (str)">
+                </div>
+                <div style="width: 100%;">
+                    <input type="text" id="inputIsbnLivreModif" placeholder="ISBN (str)">
+                </div>
+                <div style="width: 100%;">
+                    <input type="text" id="inputEditeurLivreModif" placeholder="Editeur (str)">
+                </div>
+                <div style="width: 100%;">
+                    <input type="text" id="inputPrixLivreModif" placeholder="Prix (flaot)">
+                </div>
+                <div style="width: 100%;">
+                    <input type="text" id="inputAuteurIdLivreModif" placeholder="Identifiant de l'auteur (int)">
+                </div>
+                <div style="width: 100%;">
+                    <input type="text" id="inputCategorieIdLivreModif" placeholder="Identifiant de la categorie (int)">
+                </div>
+                <button class="buValidation colorBuValidationGreen" id="buModifierLivre">Modifier le livre</button>
+                <p id="warningChangerInfoLivre" class="displayNone" style="margin-left: 10px;">Au moins un champs doit être rempli</p>
+                <p id="warningTypeLivreModif" class="displayNone" style="margin-left: 10px;">L'un des rempli champs n'a pas le bon type</p>
+            </div>
+        </div>
+        <div class="divRequetes">
+            <h2>Suppression d'un livre :</h2>
+            <div class="divInput" id="divInput">
+                <div style="width: 100%;">
+                    <input type="text" id="inputSupprimerLivre" placeholder="Identifiant du livre (int)">
+                    <p id="warningSupprimerLivre" class="displayNone">Ce champs doit être rempli &#8657;</p>
+                </div>
+                <button class="buValidation colorBuValidationRed" id="buSupprimerLivre">Supprimer le livre</button>
+                <p id="warningTypeLivreSuppr" class="displayNone" style="margin-left: 10px;">L'un des rempli champs n'a pas le bon type</p>
+            </div>
+        </div>
+        <div class="divRequetes">
+            <h2>Ajout d'un auteur :</h2>
+            <div class="divInput" id="divInput">
+                <div style="width: 100%;">
+                    <input type="text" id="inputNomAuteur" placeholder="Nom (str)">
+                    <p id="warningNomAuteur" class="displayNone">Ce champs doit être rempli &#8657;</p>
+                </div>
+                <div style="width: 100%;">
+                    <input type="text" id="inputDescriptionAuteur" placeholder="Description (str)">
+                    <p id="warningDescriptionAuteur" class="displayNone">Ce champs doit être rempli &#8657;</p>
+                </div>
+                <div style="width: 100%;">
+                    <input type="text" id="inputPhotoAuteur" placeholder="Photo (str)">
+                    <p id="warningPhotoAuteur" class="displayNone">Ce champs doit être rempli &#8657;</p>
+                </div>
+                <button class="buValidation colorBuValidationGreen" id="buAjoutAuteur">Ajout de l'auteur</button>
+            </div>
+        </div>
+        <div class="divRequetes">
+            <h2>Ajout d'une catégorie :</h2>
+            <div class="divInput" id="divInput">
+                <div style="width: 100%;">
+                    <input type="text" id="inputNomCategorie" placeholder="Nom (str)">
+                    <p id="warningNomCategorie" class="displayNone">Ce champs doit être rempli &#8657;</p>
+                </div>
+                <button class="buValidation colorBuValidationGreen" id="buAjoutCategorie">Ajout de la catégorie</button>
+            </div>
+        </div>
+        <div class="divRequetes">
+            <h2>Suppression d'un commentaire :</h2>
+            <div class="divInput" id="divInput">
+                <div style="width: 100%;">
+                    <input type="text" id="inputIdCommentaire" placeholder="Identifiant du commentaire (int)">
+                    <p id="warningIdCommentaire" class="displayNone">Ce champs doit être rempli &#8657;</p>
+                </div>
+                <button class="buValidation colorBuValidationRed" id="buSupprimerCommentaire">Suppression du commentaire</button>
+                <p id="warningTypeCommentaire" class="displayNone" style="margin-left: 10px;">L'un des champs n'a pas le bon type</p>
+            </div>
+        </div>
+    </div>
+
     <script src="../js/header.js"></script>
+    <script src="../js/admin.js"></script>
+    
 </body>

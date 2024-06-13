@@ -20,10 +20,11 @@
 
     <div class="login-container">
         <h2>Connexion</h2>
-        <input id="email" type="email" name="email" placeholder="Adresse e-mail">
-        <p id="emailP" class="displayNone">Veuillez remplir ce champs</p>
-        <input id="password" type="password" name="password" placeholder="Mot de passe">
-        <p id="passwordP" class="displayNone">Veuillez remplir ce champs</p>
+        <input id="email" type="email" name="email" placeholder="Adresse e-mail" required>
+        <p id="emailP" class="displayNone">Veuillez remplir ce champ</p>
+        <input id="password" type="password" name="password" placeholder="Mot de passe" required>
+        <p id="passwordP" class="displayNone">Veuillez remplir ce champ</p>
+        <p id="pasCorrectP" class="displayNone">Vos identifiants ne sont pas correct</p>
         <button id="login">Se connecter</button>
         <a href="inscription.html">Pas encore inscrit ? Inscrivez-vous ici</a>
     </div>
