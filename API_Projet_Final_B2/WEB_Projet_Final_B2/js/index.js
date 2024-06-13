@@ -190,7 +190,7 @@ fetch(baseURL + "/user?aleatoire=50")
 
 function createUtilisateur(json, divResult) {
     if (json.length == 0) {
-        divResult.innerHTML = "Aucun Resultat";
+        divResult.innerHTML = "Aucun Résultat";
         return;
     }
 
@@ -269,8 +269,8 @@ buRecherche.addEventListener('click', function () {
                 createUtilisateur(json, divUtilisateurs2);
             });
     } else {
-        divLivres2.innerHTML = "Auncun resultat";
-        divAuteurs2.innerHTML = "Auncun resultat";
-        divUtilisateurs2.innerHTML = "Auncun resultat";
+        divLivres2.innerHTML = "Aucun résultat";
+        divAuteurs2.innerHTML = "Aucun résultat";
+        divUtilisateurs2.innerHTML = "Aucun résultat";
     }
 });
