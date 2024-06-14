@@ -131,12 +131,16 @@ function livreInfos(arrayLivre) {
     divLivreInfos.appendChild(divInfo);
 }
 
-fetch(baseURL + "/commentaire?livre_id=" + IdLivre)
+function fetchCommentaire() {
+    fetch(baseURL + "/commentaire?livre_id=" + IdLivre)
     .then((response) => {
         return response.json();
     }).then((json) => {
         createCommentaire(json);
     });
+}
+
+fetchCommentaire();
 
 function createCommentaire(arrayCom) {
     arrayCom.forEach(element => {
@@ -206,6 +210,9 @@ buAjouterCommentaire.addEventListener('click', function () {
             }
         });
     }
+    divCommentaires.innerHTML = "";
+    fetchCommentaire();
+    textBox.value = "";
 });
 
 // Pop up => Collections

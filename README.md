@@ -21,7 +21,7 @@ git clone https://github.com/Patchouf/Projet_B2.git
 
 ### Lancer l'API en local
 
-Pour lancer l'API en local, éxecutez la commande 
+Allez dans le dossier API puis éxecutez la commande 
 
 ```bash
 dotnet run 
