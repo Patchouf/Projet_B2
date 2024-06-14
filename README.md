@@ -4,6 +4,11 @@
 
 Biblio est une application web qui permet de créer des collections de livre.
 
+Ce projet est associé à trois autres répo :
+- [BDD](https://github.com/Yann-Fournier/BDD_Projet_Final_B2),
+- [API](https://github.com/Yann-Fournier/API_Projet_Final_B2),
+- [WEB](https://github.com/Yann-Fournier/WEB_Projet_Final_B2)
+
 ## Prérequis
 
 - Docker
