@@ -1,5 +1,5 @@
 // URL API
-var baseURL = "http://localhost:8080/api/Connexion";
+var baseURL = "http://localhost:8080/api";
 
 // Input et warning
 var email = document.getElementById('email');
@@ -33,7 +33,6 @@ login.addEventListener('click', function () {
             .then((response) => {
                 return response.json();
             }).then((json) => {
-                console.log(json);
                 if (json.length != 0) {
                     console.log(json);
                     document.cookie = "Token=" + (json[0].Token || "") + "; path=/";

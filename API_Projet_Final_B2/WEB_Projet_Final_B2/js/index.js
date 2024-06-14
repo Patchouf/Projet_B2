@@ -1,5 +1,5 @@
 // URL API
-var baseURL = "http://localhost:8080";
+var baseURL = "http://localhost:8080/api";
 
 // Bouton
 var buLivres = document.getElementById('boutonLivres');

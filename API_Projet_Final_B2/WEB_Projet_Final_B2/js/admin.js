@@ -1,5 +1,5 @@
 // URL API
-var baseURL = "http://localhost:8080/api/Auth";
+var baseURL = "http://localhost:8080/api";
 
 if (isCookieSet("isConnected")) {
     if (getCookieValue("isConnected") != 2) {

@@ -8,6 +8,7 @@ using System.Text;
 using MySql.Data.MySqlClient;
 using System.Data.SQLite;
 using Newtonsoft.Json;
+using System.Threading;
 
 namespace app;
 
@@ -25,6 +26,7 @@ public class SQLRequest
 
         while (!isConnected)
         {
+            Thread.Sleep(60000);
             // Création de la connection
             MySqlConnection connection = new MySqlConnection(connectionString);
             try

@@ -63,7 +63,7 @@ class Program
             parameters.Add(key, paramet[key].Replace("+", " "));
         }
 
-        // Console.WriteLine(parameters);
+        // Console.WriteLine(context.Request.HttpMethod);
 
         // Recupération du token d'authentification -----------------------------------------------------------------------------------------------------------
         NameValueCollection auth = context.Request.Headers;
@@ -87,7 +87,7 @@ class Program
         }
 
         // Exécution de la requête
-        if (path == "") // Page d'acceuil, méthode http pas importante.
+        if (path == "/api") // Page d'acceuil, méthode http pas importante.
         {
             if (parameters.Count != 0)
             {
@@ -102,10 +102,10 @@ class Program
         {
             switch (path)
             {
-                case "/get_token": // param : mdp, email
+                case "/api/get_token": // param : mdp, email
                     if (parameters.Count == 2)
                     {
-                        data = SQLRequest.ExecuteSelectQuery(connection, "SELECT Token FROM Auth JOIN Users ON Auth.Id = Users.Id WHERE Mdp = '" + SQLRequest.HashPwd(parameters["mdp"]) + "' AND Email = '" + parameters["email"] + "';");
+                        data = SQLRequest.ExecuteSelectQuery(connection, "SELECT Auth.Token, Auth.Id, Users.Is_Admin FROM Auth JOIN Users ON Auth.Id = Users.Id WHERE Users.Mdp = '" + SQLRequest.HashPwd(parameters["mdp"]) + "' AND Users.Email = '" + parameters["email"] + "';");
                         pasOk = false;
                     }
                     else
@@ -113,7 +113,7 @@ class Program
                         pasOk = true;
                     }
                     break;
-                case "/auteur": // param : , auteur_name, auteur_id
+                case "/api/auteur": // param : , auteur_name, auteur_id
                     if (parameters.Count == 1)
                     {
                         string[] keys = parameters.AllKeys;
@@ -124,12 +124,12 @@ class Program
                         }
                         else if (keys[0] == "auteur_name")
                         {
-                            data = SQLRequest.ExecuteSelectQuery(connection, "SELECT * FROM Auteurs WHERE Nom = '" + parameters["auteur_name"] + "';");
+                            data = SQLRequest.ExecuteSelectQuery(connection, "SELECT * FROM Auteurs WHERE Nom LIKE '%" + parameters["auteur_name"] + "%';");
                             pasOk = false;
                         }
                         else if (keys[0] == "aleatoire")
                         {
-                            data = SQLRequest.ExecuteSelectQuery(connection, "SELECT * FROM Auteurs ORDER BY RANDOM() LIMIT " + parameters["aleatoire"] + ";");
+                            data = SQLRequest.ExecuteSelectQuery(connection, "SELECT * FROM Auteurs ORDER BY RAND() LIMIT " + parameters["aleatoire"] + ";");
                             pasOk = false;
                         }
                         else
@@ -147,40 +147,36 @@ class Program
                         pasOk = true;
                     }
                     break;
-                case "/categorie": // param : , categorie_name, categorie_id
-                    if (Is_Admin)
+                case "/api/categorie": // param : , categorie_name, categorie_id
+                    if (parameters.Count == 1)
                     {
-                        if (parameters.Count == 1)
+                        string[] keys = parameters.AllKeys;
+                        if (keys[0] == "categorie_id")
                         {
-                            string[] keys = parameters.AllKeys;
-                            if (keys[0] == "categorie_id")
-                            {
-                                data = SQLRequest.ExecuteSelectQuery(connection, "SELECT * FROM Categories WHERE Id = " + parameters["categorie_id"] + ";");
-                            }
-                            else if (keys[0] == "categorie_name")
-                            {
-                                data = SQLRequest.ExecuteSelectQuery(connection, "SELECT * FROM Categories WHERE Nom = '" + parameters["categorie_name"] + "';");
-                            }
-                            else
-                            {
-                                pasOk = true;
-                            }
+                            data = SQLRequest.ExecuteSelectQuery(connection, "SELECT * FROM Categories WHERE Id = " + parameters["categorie_id"] + ";");
+                            pasOk = false;
                         }
-                        else if (parameters.Count == 0)
+                        else if (keys[0] == "categorie_name")
                         {
-                            data = SQLRequest.ExecuteSelectQuery(connection, "SELECT * FROM Categories;");
+                            data = SQLRequest.ExecuteSelectQuery(connection, "SELECT * FROM Categories WHERE Nom = '" + parameters["categorie_name"] + "';");
+                            pasOk = false;
                         }
                         else
                         {
                             pasOk = true;
                         }
                     }
+                    else if (parameters.Count == 0)
+                    {
+                        data = SQLRequest.ExecuteSelectQuery(connection, "SELECT * FROM Categories;");
+                        pasOk = false;
+                    }
                     else
                     {
                         pasOk = true;
                     }
                     break;
-                case "/user": // param : , user_name, user_id
+                case "/api/user": // param : , user_name, user_id
                     if (parameters.Count == 1)
                     {
                         string[] keys = parameters.AllKeys;
@@ -191,12 +187,12 @@ class Program
                         }
                         else if (keys[0] == "user_name")
                         {
-                            data = SQLRequest.ExecuteSelectQuery(connection, "SELECT * FROM Users WHERE Nom = '" + parameters["user_name"] + "';");
+                            data = SQLRequest.ExecuteSelectQuery(connection, "SELECT * FROM Users WHERE Nom LIKE '%" + parameters["user_name"] + "%';");
                             pasOk = false;
                         }
                         else if (keys[0] == "aleatoire")
                         {
-                            data = SQLRequest.ExecuteSelectQuery(connection, "SELECT * FROM Users ORDER BY RANDOM() LIMIT " + parameters["aleatoire"] + ";");
+                            data = SQLRequest.ExecuteSelectQuery(connection, "SELECT * FROM Users ORDER BY RAND() LIMIT " + parameters["aleatoire"] + ";");
                             pasOk = false;
                         }
                         else
@@ -214,65 +210,65 @@ class Program
                         pasOk = true;
                     }
                     break;
-                case "/collection": // param : , collection_id
-                    if (Is_Admin)
+                case "/api/collection": // param : , collection_id
+                    if (parameters.Count == 1)
                     {
-                        if (parameters.Count == 1)
+                        string[] keys = parameters.AllKeys;
+                        if (keys[0] == "collection_id")
                         {
-                            string[] keys = parameters.AllKeys;
-                            if (keys[0] == "collection_id")
-                            {
-                                data = SQLRequest.ExecuteSelectQuery(connection, "SELECT * FROM Collections WHERE Id = " + parameters["collection_id"] + ";");
-                            }
-                            else
-                            {
-                                pasOk = true;
-                            }
+                            data = SQLRequest.ExecuteSelectQuery(connection, "SELECT * FROM Collections WHERE Id = " + parameters["collection_id"] + ";");
+                            pasOk = false;
                         }
-                        else if (parameters.Count == 0)
+                        else if (keys[0] == "user_id")
                         {
-                            data = SQLRequest.ExecuteSelectQuery(connection, "SELECT * FROM Collections;");
+                            data = SQLRequest.ExecuteSelectQuery(connection, "SELECT * FROM Collections WHERE Id_User = " + parameters["user_id"] + ";");
+                            pasOk = false;
                         }
                         else
                         {
                             pasOk = true;
                         }
                     }
+                    else if (parameters.Count == 0)
+                    {
+                        data = SQLRequest.ExecuteSelectQuery(connection, "SELECT * FROM Collections;");
+                        pasOk = false;
+                    }
                     else
                     {
                         pasOk = true;
                     }
                     break;
-                case "/commentaire": // param : , commentaire_id
-                    if (Is_Admin)
+                case "/api/commentaire": // param : , commentaire_id, livre_id
+                    if (parameters.Count == 1)
                     {
-                        if (parameters.Count == 1)
+                        string[] keys = parameters.AllKeys;
+                        if (keys[0] == "com_id")
                         {
-                            string[] keys = parameters.AllKeys;
-                            if (keys[0] == "com_id")
-                            {
-                                data = SQLRequest.ExecuteSelectQuery(connection, "SELECT * FROM Commentaires WHERE Id = " + parameters["commentaire_id"] + ";");
-                            }
-                            else
-                            {
-                                pasOk = true;
-                            }
+                            data = SQLRequest.ExecuteSelectQuery(connection, "SELECT * FROM Commentaires WHERE Id = " + parameters["commentaire_id"] + ";");
+                            pasOk = false;
                         }
-                        else if (parameters.Count == 0)
+                        else if (keys[0] == "livre_id")
                         {
-                            data = SQLRequest.ExecuteSelectQuery(connection, "SELECT * FROM Commentaires;");
+                            data = SQLRequest.ExecuteSelectQuery(connection, "SELECT * FROM Commentaires WHERE Id_Livre = " + parameters["livre_id"] + ";");
+                            pasOk = false;
                         }
                         else
                         {
                             pasOk = true;
                         }
                     }
+                    else if (parameters.Count == 0)
+                    {
+                        data = SQLRequest.ExecuteSelectQuery(connection, "SELECT * FROM Commentaires;");
+                        pasOk = false;
+                    }
                     else
                     {
                         pasOk = true;
                     }
                     break;
-                case "/livre": // param : , livre_name, livre_id
+                case "/api/livre": // param : , livre_name, livre_id
                     if (parameters.Count == 1)
                     {
                         string[] keys = parameters.AllKeys;
@@ -283,12 +279,17 @@ class Program
                         }
                         else if (keys[0] == "livre_name")
                         {
-                            data = SQLRequest.ExecuteSelectQuery(connection, "SELECT * FROM Livres WHERE Nom = '" + parameters["livre_name"] + "';");
+                            data = SQLRequest.ExecuteSelectQuery(connection, "SELECT * FROM Livres WHERE Nom LIKE '%" + parameters["livre_name"] + "%';");
                             pasOk = false;
                         }
                         else if (keys[0] == "aleatoire")
                         {
-                            data = SQLRequest.ExecuteSelectQuery(connection, "SELECT * FROM Livres ORDER BY RANDOM() LIMIT " + parameters["aleatoire"] + ";");
+                            data = SQLRequest.ExecuteSelectQuery(connection, "SELECT * FROM Livres ORDER BY RAND() LIMIT " + parameters["aleatoire"] + ";");
+                            pasOk = false;
+                        }
+                        else if (keys[0] == "auteur_id")
+                        {
+                            data = SQLRequest.ExecuteSelectQuery(connection, "SELECT * FROM Livres WHERE Id_Auteur = " + parameters["auteur_id"] + ";");
                             pasOk = false;
                         }
                         else
@@ -306,6 +307,25 @@ class Program
                         pasOk = true;
                     }
                     break;
+                case "/api/verif_email": // param : email
+                    if (parameters.Count == 1)
+                    {
+                        try
+                        {
+                            data = SQLRequest.ExecuteSelectQuery(connection, "SELECT COUNT(*) as Count FROM Users WHERE Email = '" + parameters["email"] + "';");
+                            pasOk = false;
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e);
+                            pasOk = true;
+                        }
+                    }
+                    else
+                    {
+                        pasOk = true;
+                    }
+                    break;
                 default:
                     pasOk = true;
                     break;
@@ -315,14 +335,17 @@ class Program
         {
             switch (path)
             {
-                case "/auteur/create": // param : nom, desc, photo
+                case "/api/auteur/create": // param : nom, desc, photo
                     if (Is_Admin)
                     {
                         if (parameters.Count == 3)
                         {
                             try
                             {
-                                string query = "INSERT INTO Auteurs (Nom, Description, Photo) VALUES ('" + parameters["nom"] + "', '" + parameters["description"] + "', '" + parameters["photo"] + "');";
+                                // Création de l'auteur
+                                string query = "SELECT COUNT(*) as Count FROM Auteurs;";
+                                data = SQLRequest.ExecuteSelectQuery(connection, query);
+                                query = "INSERT INTO Auteurs (Id, Nom, Description, Photo) VALUES (" + Int32.Parse(data[0]["Count"].ToString()) + ", '" + parameters["nom"] + "', '" + parameters["description"] + "', '" + parameters["photo"] + "');";
                                 SQLRequest.ExecuteOtherQuery(connection, query);
                                 data = "Vous avez créer un auteur";
                             }
@@ -342,7 +365,7 @@ class Program
                         pasOk = true;
                     }
                     break;
-                case "/auteur/delete": // param : auteur_id
+                case "/api/auteur/delete": // param : auteur_id
                     if (Is_Admin)
                     {
                         if (parameters.Count == 1)
@@ -369,14 +392,17 @@ class Program
                         pasOk = true;
                     }
                     break;
-                case "/categorie/create": // param : nom
+                case "/api/categorie/create": // param : nom
                     if (Is_Admin)
                     {
                         if (parameters.Count == 1)
                         {
                             try
                             {
-                                string query = "INSERT INTO Categories (Nom) VALUES ('" + parameters["nom"] + "');";
+                                // Création de la categorie
+                                string query = "SELECT COUNT(*) as Count FROM Categories;";
+                                data = SQLRequest.ExecuteSelectQuery(connection, query);
+                                query = "INSERT INTO Categories (Id, Nom) VALUES (" + Int32.Parse(data[0]["Count"].ToString()) + ", '" + parameters["nom"] + "');";
                                 SQLRequest.ExecuteOtherQuery(connection, query);
                                 data = "Vous avez créer une categorie";
                             }
@@ -396,7 +422,7 @@ class Program
                         pasOk = true;
                     }
                     break;
-                case "/categorie/delete": // param : categorie_id
+                case "/api/categorie/delete": // param : categorie_id
                     if (Is_Admin)
                     {
                         if (parameters.Count == 1)
@@ -423,28 +449,32 @@ class Program
                         pasOk = true;
                     }
                     break;
-                case "/user/create": // param : email, mdp, photo, nom
+                case "/api/user/create": // param : email, mdp, photo, nom
                     if (parameters.Count == 4)
                     {
                         try
                         {
                             // Création de l'utilisateur
-                            string query = "INSERT INTO Users (Email, Mdp, Photo, Nom, Is_Admin) VALUES ('" + parameters["email"] + "', '" + SQLRequest.HashPwd(parameters["mdp"]) + "', '" + parameters["photo"] + "', '" + parameters["nom"] + "', 0);";
+                            string query = "SELECT COUNT(*) as Count FROM Users;";
+                            data = SQLRequest.ExecuteSelectQuery(connection, query);
+                            query = "INSERT INTO Users (Id, Email, Mdp, Photo, Nom, Is_Admin) VALUES (" + Int32.Parse(data[0]["Count"].ToString()) + ", '" + parameters["email"] + "', '" + SQLRequest.HashPwd(parameters["mdp"]) + "', '" + parameters["photo"] + "', '" + parameters["nom"] + "', 0);";
                             SQLRequest.ExecuteOtherQuery(connection, query);
                             query = "SELECT Id FROM Users WHERE Mdp = '" + SQLRequest.HashPwd(parameters["mdp"]) + "' AND Email = '" + parameters["email"] + "';";
                             dynamic id = SQLRequest.ExecuteSelectQuery(connection, query);
                             // Insertion des collection
-                            query = "INSERT INTO Collections (Id_User, Nom, Is_Private) VALUES (" + id[0]["Id"] + ", 'J&#39ai', 1);";
+                            query = "SELECT COUNT(*) as Count FROM Collections;";
+                            data = SQLRequest.ExecuteSelectQuery(connection, query);
+                            query = "INSERT INTO Collections (Id, Id_User, Nom, Is_Private) VALUES (" + Int32.Parse(data[0]["Count"].ToString()) + ", " + id[0]["Id"] + ", 'J&#39ai', 1);";
                             SQLRequest.ExecuteOtherQuery(connection, query);
-                            query = "INSERT INTO Collections (Id_User, Nom, Is_Private) VALUES(" + id[0]["Id"] + ", 'Ma pile à lire', 1);";
+                            query = "INSERT INTO Collections (Id, Id_User, Nom, Is_Private) VALUES(" + (Int32.Parse(data[0]["Count"].ToString()) + 1) + ", " + id[0]["Id"] + ", 'Ma pile à lire', 1);";
                             SQLRequest.ExecuteOtherQuery(connection, query);
-                            query = "INSERT INTO Collections (Id_User, Nom, Is_Private) VALUES(" + id[0]["Id"] + ", 'Je lis', 1);";
+                            query = "INSERT INTO Collections (Id, Id_User, Nom, Is_Private) VALUES(" + (Int32.Parse(data[0]["Count"].ToString()) + 2) + ", " + id[0]["Id"] + ", 'Je lis', 1);";
                             SQLRequest.ExecuteOtherQuery(connection, query);
-                            query = "INSERT INTO Collections (Id_User, Nom, Is_Private) VALUES(" + id[0]["Id"] + ", 'J&#39ai lu', 1);";
+                            query = "INSERT INTO Collections (Id, Id_User, Nom, Is_Private) VALUES(" + (Int32.Parse(data[0]["Count"].ToString()) + 3) + ", " + id[0]["Id"] + ", 'J&#39ai lu', 1);";
                             SQLRequest.ExecuteOtherQuery(connection, query);
-                            query = "INSERT INTO Collections (Id_User, Nom, Is_Private) VALUES(" + id[0]["Id"] + ", 'J&#39aime', 1);";
+                            query = "INSERT INTO Collections (Id, Id_User, Nom, Is_Private) VALUES(" + (Int32.Parse(data[0]["Count"].ToString()) + 4) + ", " + id[0]["Id"] + ", 'J&#39aime', 1);";
                             SQLRequest.ExecuteOtherQuery(connection, query);
-                            query = "INSERT INTO Collections (Id_User, Nom, Is_Private) VALUES(" + id[0]["Id"] + ", 'Ma liste de souhait', 1);";
+                            query = "INSERT INTO Collections (Id, Id_User, Nom, Is_Private) VALUES(" + (Int32.Parse(data[0]["Count"].ToString()) + 5) + ", " + id[0]["Id"] + ", 'Ma liste de souhait', 1);";
                             SQLRequest.ExecuteOtherQuery(connection, query);
                             // Création du token
                             query = "INSERT INTO Auth (Id, Token) VALUES(" + id[0]["Id"] + ", '" + SQLRequest.HashPwd(parameters["nom"]) + "');";
@@ -464,7 +494,7 @@ class Program
                         pasOk = true;
                     }
                     break;
-                case "/user/delete": // param : user_id
+                case "/api/user/delete": // param : user_id
                     if (parameters.Count == 1)
                     {
                         try
@@ -498,7 +528,7 @@ class Program
                     }
 
                     break;
-                case "/user/change_info": // param : email, mdp, photo, nom, is_admin (admin), user_id (admin) (optio)
+                case "/api/user/change_info": // param : email, mdp, photo, nom, is_admin (admin), user_id (admin) (optio)
                     if (Is_Admin)
                     {
                         if (parameters.Count > 0 && parameters.Count < 7)
@@ -594,7 +624,7 @@ class Program
                         pasOk = true;
                     }
                     break;
-                case "/user/follow_user": // param : follow_user_id, user_id (admin)
+                case "/api/user/follow_user": // param : follow_user_id, user_id (admin)
                     if (Is_Admin && parameters.Count == 2)
                     {
                         try
@@ -629,7 +659,7 @@ class Program
                         pasOk = true;
                     }
                     break;
-                case "/user/unfollow_user": // param : unfollow_user_id, user_id (admin)
+                case "/api/user/unfollow_user": // param : unfollow_user_id, user_id (admin)
                     if (Is_Admin && parameters.Count == 2)
                     {
                         try
@@ -663,7 +693,7 @@ class Program
                         pasOk = true;
                     }
                     break;
-                case "/user/follow_auteur": // param : follow_auteur_id, user_id (admin)
+                case "/api/user/follow_auteur": // param : follow_auteur_id, user_id (admin)
                     if (Is_Admin && parameters.Count == 2)
                     {
                         try
@@ -697,7 +727,7 @@ class Program
                         pasOk = true;
                     }
                     break;
-                case "/user/unfollow_auteur": // param : unfollow_auteur_id, user_id (admin)
+                case "/api/user/unfollow_auteur": // param : unfollow_auteur_id, user_id (admin)
                     if (Is_Admin && parameters.Count == 2)
                     {
                         try
@@ -731,12 +761,15 @@ class Program
                         pasOk = true;
                     }
                     break;
-                case "/collection/create": // param : nom, is_private, user_id (admin)
+                case "/api/collection/create": // param : nom, is_private, user_id (admin)
                     if (Is_Admin && parameters.Count == 3)
                     {
                         try
                         {
-                            string query = "INSERT INTO Collections (Id_User, Nom, Is_Private) VALUES (" + parameters["user_id"] + ", '" + parameters["nom"] + "', " + parameters["is_private"] + ");";
+                            // Création de la collection
+                            string query = "SELECT COUNT(*) as Count FROM Collections;";
+                            data = SQLRequest.ExecuteSelectQuery(connection, query);
+                            string query = "INSERT INTO Collections (Id, Id_User, Nom, Is_Private) VALUES (" + Int32.Parse(data[0]["Count"].ToString()) + ", " + parameters["user_id"] + ", '" + parameters["nom"] + "', " + parameters["is_private"] + ");";
                             SQLRequest.ExecuteOtherQuery(connection, query);
                             data = "Vous venez de créer une collection pour un utilisateur";
                         }
@@ -751,7 +784,10 @@ class Program
                     {
                         try
                         {
-                            string query = "INSERT INTO Collections (Id_User, Nom, Is_Private) VALUES (" + User_Id + ", '" + parameters["nom"] + "', " + parameters["is_private"] + ");";
+                            // Création de la collection
+                            string query = "SELECT COUNT(*) as Count FROM Collections;";
+                            data = SQLRequest.ExecuteSelectQuery(connection, query);
+                            string query = "INSERT INTO Collections (Id, Id_User, Nom, Is_Private) VALUES (" + Int32.Parse(data[0]["Count"].ToString()) + ", " + User_Id + ", '" + parameters["nom"] + "', " + parameters["is_private"] + ");";
                             SQLRequest.ExecuteOtherQuery(connection, query);
                             data = "Vous venez de vous créer une collection ";
                         }
@@ -766,7 +802,7 @@ class Program
                         pasOk = true;
                     }
                     break;
-                case "/collection/delete": // parma : collection_id
+                case "/api/collection/delete": // parma : collection_id
                     if (Is_Admin && parameters.Count == 1)
                     {
                         try
@@ -804,7 +840,7 @@ class Program
                         pasOk = true;
                     }
                     break;
-                case "/collection/add_livre": // param : collection_id, livre_id
+                case "/api/collection/add_livre": // param : collection_id, livre_id
                     if (Is_Admin && parameters.Count == 2)
                     {
                         try
@@ -852,7 +888,7 @@ class Program
                         pasOk = true;
                     }
                     break;
-                case "/collection/delete_livre": // param : collection_id, livre_id
+                case "/api/collection/delete_livre": // param : collection_id, livre_id
                     if (Is_Admin && parameters.Count == 2)
                     {
                         try
@@ -901,12 +937,14 @@ class Program
                         pasOk = true;
                     }
                     break;
-                case "/commentaire/add": // param : livre_id, text_commentaire
+                case "/api/commentaire/add": // param : livre_id, text_commentaire
                     if (parameters.Count == 2)
                     {
                         try
                         {
-                            string query = "INSERT INTO Commentaires (Id_User, Id_Livre, Com) VALUES (" + User_Id + ", " + parameters["livre_id"] + ", '" + parameters["text_commentaire"] + "');";
+                            string query = "SELECT COUNT(*) as Count FROM Commentaires;";
+                            data = SQLRequest.ExecuteSelectQuery(connection, query);
+                            query = "INSERT INTO Commentaires (Id, Id_User, Id_Livre, Com) VALUES (" + Int32.Parse(data[0]["Count"].ToString()) + ", " + User_Id + ", " + parameters["livre_id"] + ", '" + parameters["text_commentaire"] + "');";
                             SQLRequest.ExecuteOtherQuery(connection, query);
                             data = "Vous avez ajouter un commentaire";
                         }
@@ -921,7 +959,7 @@ class Program
                         pasOk = true;
                     }
                     break;
-                case "/commentaire/delete": // param : commentaire_id
+                case "/api/commentaire/delete": // param : commentaire_id
                     if (Is_Admin && parameters.Count == 1)
                     {
                         try
@@ -941,12 +979,14 @@ class Program
                         pasOk = true;
                     }
                     break;
-                case "/livre/add": // param : nom, description, photo, isbn, editeur, prix, auteur_id, categorie_id
+                case "/api/livre/add": // param : nom, description, photo, isbn, editeur, prix, auteur_id, categorie_id
                     if (Is_Admin && parameters.Count == 8)
                     {
                         try
                         {
-                            string query = "INSERT INTO Livres (Id_Auteur, Id_Categorie, Nom, Description, Photo, ISBN, Editeur, Prix) VALUES (" + parameters["auteur_id"] + ", " + parameters["categorie_id"] + ", '" + parameters["nom"] + "', '" + parameters["description"] + "', '" + parameters["photo"] + "', '" + parameters["isbn"] + "', '" + parameters["editeur"] + "', " + parameters["prix"] + ");";
+                            string query = "SELECT COUNT(*) as Count FROM Livres;";
+                            data = SQLRequest.ExecuteSelectQuery(connection, query);
+                            query = "INSERT INTO Livres (Id, Id_Auteur, Id_Categorie, Nom, Description, Photo, ISBN, Editeur, Prix) VALUES (" + Int32.Parse(data[0]["Count"].ToString()) + ", " + parameters["auteur_id"] + ", " + parameters["categorie_id"] + ", '" + parameters["nom"] + "', '" + parameters["description"] + "', '" + parameters["photo"] + "', '" + parameters["isbn"] + "', '" + parameters["editeur"] + "', " + parameters["prix"] + ");";
                             SQLRequest.ExecuteOtherQuery(connection, query);
                             data = "Vous venez d'ajouter un livre";
                         }
@@ -957,7 +997,7 @@ class Program
                         }
                     }
                     break;
-                case "/livre/delete": // param : livre_id
+                case "/api/livre/delete": // param : livre_id
                     if (Is_Admin && parameters.Count == 1)
                     {
                         try
@@ -973,7 +1013,7 @@ class Program
                         }
                     }
                     break;
-                case "/livre/change_info": // param : livre_id (ob), nom, description, photo, isbn, editeur, prix, auteur_id, categorie_id, (opti)
+                case "/api/livre/change_info": // param : livre_id (ob), nom, description, photo, isbn, editeur, prix, auteur_id, categorie_id, (opti)
                     if (Is_Admin)
                     {
                         if (parameters.Count > 0 && parameters.Count < 7)

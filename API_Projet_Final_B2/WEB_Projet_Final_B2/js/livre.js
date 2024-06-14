@@ -1,5 +1,5 @@
 // URL API
-var baseURL = "http://localhost:8080/api/Livres";
+var baseURL = "http://localhost:8080/api";
 
 // Récupération de l'Id dans l'url ou dans les cookie
 var parametres = new URLSearchParams(window.location.search);
@@ -28,6 +28,7 @@ fetch(baseURL + "/livre?livre_id=" + IdLivre)
     .then((response) => {
         return response.json();
     }).then((json) => {
+        console.log(json);
         livreInfos(json);
     });
 
@@ -134,6 +135,7 @@ fetch(baseURL + "/commentaire?livre_id=" + IdLivre)
     .then((response) => {
         return response.json();
     }).then((json) => {
+        console.log(json);
         createCommentaire(json);
     });
 
@@ -221,6 +223,7 @@ fetch(baseURL + "/collection", {
 }).then((response) => {
     return response.json();
 }).then((json) => {
+    console.log(json);
     createCollection(json);
 });
 

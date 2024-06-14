@@ -1,4 +1,3 @@
-import pandas as pd
 import sqlite3
 lines = []
 
@@ -10,7 +9,7 @@ query_user = "SELECT * FROM Users;"
 cur.execute(query_user)
 results = cur.fetchall()  # renvoie un tableau de tableau
 for i in range(len(results)):
-    lines.append("INSERT INTO Users (Id, Email, Mdp, Photo, Nom, Is_Admin) VALUES (" + str(results[i][0]) + ", '" + str(results[i][1]) + "', '" + str(results[i][2]) + "', '" + str(results[i][3]) + "', '" + str(results[i][4]) + "', " + str(results[i][5]) + ");\n")
+    lines.append("INSERT INTO Users (Email, Mdp, Photo, Nom, Is_Admin) VALUES ('" + str(results[i][1]) + "', '" + str(results[i][2]) + "', '" + str(results[i][3]) + "', '" + str(results[i][4]) + "', " + str(results[i][5]) + ");\n")
 
 
 # Auth
@@ -25,28 +24,28 @@ query_user = "SELECT * FROM Categories;"
 cur.execute(query_user)
 results = cur.fetchall()  # renvoie un tableau de tableau
 for i in range(len(results)):
-    lines.append("INSERT INTO Categories (Id, Nom) VALUES (" + str(results[i][0]) + ", '" + str(results[i][1]) + "');\n")
+    lines.append("INSERT INTO Categories (Nom) VALUES ('" + str(results[i][1]) + "');\n")
 
 # Auteurs
 query_auteur = "SELECT * FROM Auteurs;"
 cur.execute(query_auteur)
 results = cur.fetchall()  # renvoie un tableau de tableau
 for i in range(len(results)):
-    lines.append("INSERT INTO Auteurs (Id, Nom, Description, Photo) VALUES (" + str(results[i][0]) + ", '" + str(results[i][1]) + "', '" + str(results[i][2]) + "', '" + str(results[i][3]) +"');\n")
+    lines.append("INSERT INTO Auteurs (Nom, Description, Photo) VALUES ('" + str(results[i][1]) + "', '" + str(results[i][2]) + "', '" + str(results[i][3]) +"');\n")
 
 # Livres
 query_auteur = "SELECT * FROM Livres;"
 cur.execute(query_auteur)
 results = cur.fetchall()  # renvoie un tableau de tableau
 for i in range(len(results)):
-    lines.append("INSERT INTO Livres (Id, Id_Auteur, Id_Categorie, Nom, Description, Photo, ISBN, Editeur, Prix) VALUES (" + str(results[i][0]) + ", " + str(results[i][1]) + ", " + str(results[i][2]) + ", '" + str(results[i][3]) + "', '" + str(results[i][4]) +"', '" + str(results[i][5]) +"', '" + str(results[i][6]) +"', '" + str(results[i][7]) +"', " + str(results[i][8]) +");\n")
+    lines.append("INSERT INTO Livres (Id_Auteur, Id_Categorie, Nom, Description, Photo, ISBN, Editeur, Prix) VALUES (" + str(results[i][1]) + ", " + str(results[i][2]) + ", '" + str(results[i][3]) + "', '" + str(results[i][4]) +"', '" + str(results[i][5]) +"', '" + str(results[i][6]) +"', '" + str(results[i][7]) +"', " + str(results[i][8]) +");\n")
 
 # Collections
 query_auteur = "SELECT * FROM Collections;"
 cur.execute(query_auteur)
 results = cur.fetchall()  # renvoie un tableau de tableau
 for i in range(len(results)):
-    lines.append("INSERT INTO Collections (Id, Id_User, Nom, Is_Private) VALUES (" + str(results[i][0]) + ", " + str(results[i][1]) + ", '" + str(results[i][2]) + "', " + str(results[i][3]) +");\n")
+    lines.append("INSERT INTO Collections (Id_User, Nom, Is_Private) VALUES (" + str(results[i][1]) + ", '" + str(results[i][2]) + "', " + str(results[i][3]) +");\n")
 
 # Collec
 query_auteur = "SELECT * FROM Collec;"
@@ -60,7 +59,7 @@ query_auteur = "SELECT * FROM Commentaires;"
 cur.execute(query_auteur)
 results = cur.fetchall()  # renvoie un tableau de tableau
 for i in range(len(results)):
-    lines.append("INSERT INTO Commentaires (Id, Id_User, Id_Livre, Com) VALUES (" + str(results[i][0]) + ", " + str(results[i][1]) + ", " + str(results[i][2]) + ", '" + str(results[i][3]) + "');\n")
+    lines.append("INSERT INTO Commentaires (Id_User, Id_Livre, Com) VALUES (" + str(results[i][1]) + ", " + str(results[i][2]) + ", '" + str(results[i][3]) + "');\n")
 
 # Users_Suivi
 query_auteur = "SELECT * FROM Users_Suivi;"
