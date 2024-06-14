@@ -135,7 +135,6 @@ fetch(baseURL + "/commentaire?livre_id=" + IdLivre)
     .then((response) => {
         return response.json();
     }).then((json) => {
-        console.log(json);
         createCommentaire(json);
     });
 
@@ -260,7 +259,6 @@ function createCollection(arrayCollection) {
         var collec = document.getElementsByClassName('collection-name');
         var checkbox = document.getElementsByClassName('checkbox');
         for (let i = 0; i < collec.length; i++) {
-            // console.log(collec[i].innerHTML + " : " + checkbox[i].checked + " : " + checkbox[i].id);
             // Ajout du livre aux collection si la checkbox est cochée 
             if (checkbox[i].checked) {
                 const response = fetch(baseURL + "/collection/add_livre?livre_id=" + IdLivre + "&collection_id=" + checkbox[i].id, {

@@ -211,17 +211,24 @@ class Program
                     }
                     break;
                 case "/api/collection": // param : , collection_id
-                    if (parameters.Count == 1)
+                    if (Is_Admin) 
                     {
-                        string[] keys = parameters.AllKeys;
-                        if (keys[0] == "collection_id")
+                        if (parameters.Count == 1)
                         {
-                            data = SQLRequest.ExecuteSelectQuery(connection, "SELECT * FROM Collections WHERE Id = " + parameters["collection_id"] + ";");
-                            pasOk = false;
+                            string[] keys = parameters.AllKeys;
+                            if (keys[0] == "collection_id")
+                            {
+                                data = SQLRequest.ExecuteSelectQuery(connection, "SELECT * FROM Collections WHERE Id = " + parameters["collection_id"] + ";");
+                                pasOk = false;
+                            }
+                            else
+                            {
+                                pasOk = true;
+                            }
                         }
-                        else if (keys[0] == "user_id")
+                        else if (parameters.Count == 0)
                         {
-                            data = SQLRequest.ExecuteSelectQuery(connection, "SELECT * FROM Collections WHERE Id_User = " + parameters["user_id"] + ";");
+                            data = SQLRequest.ExecuteSelectQuery(connection, "SELECT * FROM Collections;");
                             pasOk = false;
                         }
                         else
@@ -229,14 +236,18 @@ class Program
                             pasOk = true;
                         }
                     }
-                    else if (parameters.Count == 0)
-                    {
-                        data = SQLRequest.ExecuteSelectQuery(connection, "SELECT * FROM Collections;");
-                        pasOk = false;
-                    }
-                    else
-                    {
-                        pasOk = true;
+                    else if (User_Id != -1) {
+                        try
+                        {
+                            data = SQLRequest.ExecuteSelectQuery(connection, "SELECT * FROM Collections WHERE Id_User = " + User_Id + ";");
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e);
+                            pasOk = true;
+                        } 
+                    } else {
+                        pasOk = true; 
                     }
                     break;
                 case "/api/commentaire": // param : , commentaire_id, livre_id
@@ -290,6 +301,11 @@ class Program
                         else if (keys[0] == "auteur_id")
                         {
                             data = SQLRequest.ExecuteSelectQuery(connection, "SELECT * FROM Livres WHERE Id_Auteur = " + parameters["auteur_id"] + ";");
+                            pasOk = false;
+                        }
+                        else if (keys[0] == "collection_id")
+                        {
+                            data = SQLRequest.ExecuteSelectQuery(connection, "SELECT * FROM Livres JOIN Collec ON Livres.Id = Collec.Id_Livre WHERE Collec.Id_Collection = " + parameters["collection_id"] + ";");
                             pasOk = false;
                         }
                         else
@@ -769,7 +785,7 @@ class Program
                             // Création de la collection
                             string query = "SELECT COUNT(*) as Count FROM Collections;";
                             data = SQLRequest.ExecuteSelectQuery(connection, query);
-                            string query = "INSERT INTO Collections (Id, Id_User, Nom, Is_Private) VALUES (" + Int32.Parse(data[0]["Count"].ToString()) + ", " + parameters["user_id"] + ", '" + parameters["nom"] + "', " + parameters["is_private"] + ");";
+                            query = "INSERT INTO Collections (Id, Id_User, Nom, Is_Private) VALUES (" + Int32.Parse(data[0]["Count"].ToString()) + ", " + parameters["user_id"] + ", '" + parameters["nom"] + "', " + parameters["is_private"] + ");";
                             SQLRequest.ExecuteOtherQuery(connection, query);
                             data = "Vous venez de créer une collection pour un utilisateur";
                         }
@@ -787,7 +803,7 @@ class Program
                             // Création de la collection
                             string query = "SELECT COUNT(*) as Count FROM Collections;";
                             data = SQLRequest.ExecuteSelectQuery(connection, query);
-                            string query = "INSERT INTO Collections (Id, Id_User, Nom, Is_Private) VALUES (" + Int32.Parse(data[0]["Count"].ToString()) + ", " + User_Id + ", '" + parameters["nom"] + "', " + parameters["is_private"] + ");";
+                            query = "INSERT INTO Collections (Id, Id_User, Nom, Is_Private) VALUES (" + Int32.Parse(data[0]["Count"].ToString()) + ", " + User_Id + ", '" + parameters["nom"] + "', " + parameters["is_private"] + ");";
                             SQLRequest.ExecuteOtherQuery(connection, query);
                             data = "Vous venez de vous créer une collection ";
                         }
@@ -944,7 +960,7 @@ class Program
                         {
                             string query = "SELECT COUNT(*) as Count FROM Commentaires;";
                             data = SQLRequest.ExecuteSelectQuery(connection, query);
-                            query = "INSERT INTO Commentaires (Id, Id_User, Id_Livre, Com) VALUES (" + Int32.Parse(data[0]["Count"].ToString()) + ", " + User_Id + ", " + parameters["livre_id"] + ", '" + parameters["text_commentaire"] + "');";
+                            query = "INSERT INTO Commentaires (Id, Id_User, Id_Livre, Com) VALUES (" + (Int32.Parse(data[0]["Count"].ToString()) + 1) + ", " + User_Id + ", " + parameters["livre_id"] + ", '" + parameters["text_commentaire"] + "');";
                             SQLRequest.ExecuteOtherQuery(connection, query);
                             data = "Vous avez ajouter un commentaire";
                         }
