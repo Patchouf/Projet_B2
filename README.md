@@ -33,6 +33,11 @@ dotnet run
 ```
 ### Lancer Biblio avec Docker
 
+Voici l'adresse de l'API via docker :
+```bash
+http://localhost:8080/api
+```
+
 Pour lancer l'application avec Docker, nous allons utiliser une commande Docker compose :
 
 ```bash
